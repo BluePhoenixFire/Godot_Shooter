@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://byssdaoch8tdt"]
+
+[ext_resource type="PackedScene" uid="uid://6aiwxdqajaw6" path="res://scenes/Objects/light.tscn" id="1_iw8sq"]
+[ext_resource type="Script" path="res://scenes/Objects/LightBulb.gd" id="2_5we8h"]
+
+[node name="Light_Blinking" instance=ExtResource("1_iw8sq")]
+position = Vector2(670, 356)
+
+[node name="LightBulb" parent="." index="2"]
+script = ExtResource("2_5we8h")

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsfcrvmi3n1ax"]
+
+[ext_resource type="Script" path="res://graphics/DecorationArea.gd" id="2_px0it"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ammd"]
+size = Vector2(895.25, 743.875)
+
+[node name="DecorationArea" type="Area2D"]
+script = ExtResource("2_px0it")
+
+[node name="DecorationAreaShape" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_4ammd")

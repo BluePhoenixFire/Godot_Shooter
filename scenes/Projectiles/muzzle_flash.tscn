@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dw4i4fsi5nl4e"]
+
+[ext_resource type="Texture2D" uid="uid://dr65i6rq76cdo" path="res://graphics/explosions/gun.png" id="1_hmt73"]
+[ext_resource type="Script" path="res://scenes/Projectiles/GPUParticles2D.gd" id="2_ld6cc"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_htblc"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_min = 180.0
+angle_max = 180.0
+scale_min = 0.2
+scale_max = 0.2
+
+[node name="muzzle_flash" type="GPUParticles2D"]
+position = Vector2(0, 60)
+rotation = -1.5708
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_htblc")
+texture = ExtResource("1_hmt73")
+lifetime = 0.2
+one_shot = true
+script = ExtResource("2_ld6cc")

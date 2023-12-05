@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://caoliakc8r3i4"]
+
+[ext_resource type="Script" path="res://scenes/levels/ExitArea.gd" id="1_52680"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1vxrh"]
+size = Vector2(374, 111)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_o54n0"]
+
+[node name="InteractArea" type="Area2D"]
+position = Vector2(-182, 468)
+script = ExtResource("1_52680")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-12, -31.5)
+shape = SubResource("RectangleShape2D_1vxrh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.0196078, 0, 0.466667)
+position = Vector2(-11, -31.5)
+scale = Vector2(372, 111)
+texture = SubResource("CanvasTexture_o54n0")

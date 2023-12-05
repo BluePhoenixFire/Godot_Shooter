@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7gkncc5agwf4"]
+
+[ext_resource type="Texture2D" uid="uid://bt0tgd5hjbghx" path="res://graphics/items/orb2.png" id="1_5lros"]
+[ext_resource type="Script" path="res://scenes/Items/item.gd" id="1_gis16"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u8c3w"]
+radius = 49.3356
+
+[node name="Item" type="Area2D"]
+collision_layer = 16
+script = ExtResource("1_gis16")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_5lros")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u8c3w")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.4
+texture = ExtResource("1_5lros")
+texture_scale = 0.5
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

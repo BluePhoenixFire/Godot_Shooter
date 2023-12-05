@@ -1,0 +1,110 @@
+[gd_scene load_steps=11 format=3 uid="uid://i2iy3mohpycb"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_0cjx2"]
+[ext_resource type="Texture2D" uid="uid://bpqwa7cf3fnim" path="res://graphics/player/player.png" id="1_ynsn5"]
+[ext_resource type="Script" path="res://scenes/player/Scorekeeper.gd" id="3_i7lag"]
+[ext_resource type="Texture2D" uid="uid://bt0tgd5hjbghx" path="res://graphics/items/orb2.png" id="4_cj2k7"]
+[ext_resource type="Texture2D" uid="uid://dpg35kub0e1eo" path="res://FlashlightLightMap.png" id="5_amlfb"]
+[ext_resource type="Texture2D" uid="uid://cipfn3cs7f616" path="res://graphics/lights/textures/circle.png" id="6_qejl0"]
+[ext_resource type="PackedScene" uid="uid://6o75ihw3nn8" path="res://Interact_Icon.tscn" id="7_tr0lu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o5wdx"]
+radius = 59.9083
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rsfcb"]
+particle_flag_disable_z = true
+spread = 15.0
+initial_velocity_min = 750.0
+initial_velocity_max = 1000.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.5
+color = Color(0.772549, 0.92549, 0.992157, 1)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0158f"]
+polygon = PackedVector2Array(-63, -57, -86, -41, -99, -8, -94, 19, -64, 52, -42, 59, 0, 42, 63, 40, 88, 34, 86, 4, 45, -10, 10, -27, -12, -59)
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 31
+script = ExtResource("1_0cjx2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-40, -3)
+shape = SubResource("CircleShape2D_o5wdx")
+metadata/_edit_lock_ = true
+
+[node name="PlayerImage" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_ynsn5")
+metadata/_edit_lock_ = true
+
+[node name="Scorekeeper" type="Node" parent="."]
+script = ExtResource("3_i7lag")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.4, 0.4)
+metadata/_edit_lock_ = true
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="LaserTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="GrenadeTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="LaserStartPositions" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Marker2D" type="Marker2D" parent="LaserStartPositions"]
+position = Vector2(96, 20)
+rotation = 1.5708
+
+[node name="Marker2D2" type="Marker2D" parent="LaserStartPositions"]
+position = Vector2(92, 9)
+rotation = 1.5708
+
+[node name="Marker2D3" type="Marker2D" parent="LaserStartPositions"]
+position = Vector2(92, 31)
+rotation = 1.5708
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(94, 21)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_rsfcb")
+texture = ExtResource("4_cj2k7")
+lifetime = 0.1
+one_shot = true
+metadata/_edit_lock_ = true
+
+[node name="PlayerFlashLight" type="PointLight2D" parent="."]
+z_index = -1
+z_as_relative = false
+position = Vector2(86, -11)
+rotation = 1.5708
+energy = 1.8
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.447059)
+shadow_filter = 2
+shadow_filter_smooth = 6.5
+texture = ExtResource("5_amlfb")
+offset = Vector2(0, -475)
+texture_scale = 4.47
+height = 1.0
+metadata/_edit_lock_ = true
+
+[node name="PlayerLightAura" type="PointLight2D" parent="."]
+energy = 3.56
+texture = ExtResource("6_qejl0")
+texture_scale = 0.4
+metadata/_edit_lock_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_0158f")
+metadata/_edit_lock_ = true
+
+[node name="InteractIcon" parent="." instance=ExtResource("7_tr0lu")]
+position = Vector2(-30, -110)
+
+[connection signal="timeout" from="Timers/LaserTimer" to="." method="_on_laser_timer_timeout"]
+[connection signal="timeout" from="Timers/GrenadeTimer" to="." method="_on_grenade_timer_timeout"]

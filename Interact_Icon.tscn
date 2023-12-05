@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://6o75ihw3nn8"]
+
+[ext_resource type="Texture2D" uid="uid://dbos4swa34rxd" path="res://graphics/Icons/icon_49.png" id="1_ejufq"]
+[ext_resource type="Texture2D" uid="uid://cipfn3cs7f616" path="res://graphics/lights/textures/circle.png" id="2_3fq3a"]
+[ext_resource type="Script" path="res://Interact_Icon.gd" id="2_mynt7"]
+
+[node name="InteractIcon" type="Sprite2D"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_ejufq")
+script = ExtResource("2_mynt7")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.176471, 1, 0.384314, 1)
+texture = ExtResource("2_3fq3a")

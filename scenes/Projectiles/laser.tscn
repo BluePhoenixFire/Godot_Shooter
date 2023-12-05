@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://d4dhdnq5x88pg"]
+
+[ext_resource type="Script" path="res://scenes/Projectiles/laser.gd" id="1_2j82h"]
+[ext_resource type="Texture2D" uid="uid://dys7gr1ho5x1p" path="res://graphics/projectiles/blue.png" id="1_a4iyq"]
+[ext_resource type="Texture2D" uid="uid://cxg80sy07ngta" path="res://graphics/projectiles/blueLightMap.png" id="3_uo1g7"]
+[ext_resource type="AudioStream" uid="uid://d444orahbg3g" path="res://audio/laser.wav" id="4_gmpmf"]
+[ext_resource type="Script" path="res://scenes/Projectiles/LaserShootSFX.gd" id="5_nv2mt"]
+[ext_resource type="Texture2D" uid="uid://cipfn3cs7f616" path="res://graphics/lights/textures/circle.png" id="5_rlt2u"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mavsh"]
+radius = 8.0
+height = 160.0
+
+[node name="Laser" type="Area2D"]
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("1_2j82h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -12)
+shape = SubResource("CapsuleShape2D_mavsh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_a4iyq")
+
+[node name="laserBeamLight" type="PointLight2D" parent="."]
+position = Vector2(1, -59)
+color = Color(0.580392, 0.929412, 1, 1)
+texture = ExtResource("3_uo1g7")
+
+[node name="LaserShootSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_gmpmf")
+volume_db = -13.932
+autoplay = true
+script = ExtResource("5_nv2mt")
+
+[node name="laserFlashLight" type="PointLight2D" parent="."]
+energy = 2.0
+shadow_color = Color(0, 0, 0, 0.00392157)
+texture = ExtResource("5_rlt2u")
+texture_scale = 5.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
